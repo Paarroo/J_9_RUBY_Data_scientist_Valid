@@ -3,55 +3,47 @@ array_handle =  ["@jcunniet","@PaulLampon","@Aziliz31","@ssoumier","@marionsouze
 
 # Combien y a-t-il de handle dans cette array ?
 array_handle_count = array_handle.length
-print "> "
-puts "Cette array contient : #{array_handle_count} handles !"
+puts"\n> Cette array contient : #{array_handle_count} handles !"
 
 
 # Quel est le handle le plus court de cette liste ?
 shortest_handle = array_handle.min_by { |x| x.length }
-print "> "
-puts "le handle le plus court de cette array est : #{shortest_handle} !"
+puts "\n> le handle le plus court de cette array est : #{shortest_handle} !"
 
 
 # Combien y-a-t'il de handle contenant 5 caractères (le @ ne compte pas pour un caractère)
 
 #gsub('@', ''): delete @ on the string
-five_caract_handle = array_handle.count { |handle| handle.gsub('@', '').length == 5 }
-print "> "
-puts "Il y a #{five_caract_handle} handles contenant 5 caractères !"
+five_caract_handle = array_handle.count { |x| x.gsub('@', '').length == 5 }
+puts "\n> Il y a #{five_caract_handle} handles contenant 5 caractères !"
 
 
-# Combien commencent par une majuscule (première lettre juste après le @) ?
-count = array_handle.count { |s| s.start_with?('@') && s[1] == s[1].upcase }
-print "> "
-puts "Il y a #{count} handles commençant par une majuscule après @ !"
+# Combien de handles commencent par une majuscule (première lettre juste après le @) ?
+count = array_handle.count { |x| x =~ /^@[A-Z]/ }
+puts "\n> Il y a #{count} handles commençant par une majuscule après @ !"
 
 
-# Trie la liste de handle par ordre alphabétique.
-array_handle_alpha_order = array_handle.sort
-print "> "
-puts "Liste de handle triés par ordre alphabétique : >> #{array_handle_alpha_order} !" #+ .join("")} pour un saut de ligne entre chaque handle
+# Trie de la liste de handle par ordre alphabétique.""
+array_handle_alpha_order = array_handle.sort_by { |x| x.downcase.gsub(/^[@]/, '') }
+puts "\n>> Liste de handle triés par ordre alphabétique : >>\n\n#{array_handle_alpha_order.join("\n")}"
 
 # Trie la liste de handle par taille des handle (les plus petits en premiers, les plus grands après
 array_handle_size = array_handle.sort_by { |array_handle| array_handle.length }
-print "> "
-puts "Liste de handle triés par taille : >> #{array_handle_size} !"
+puts "\n>> Liste de handle triés par taille : >>\n\n#{array_handle_size.join("\n")} !"
 
 
 # Quelle est la position dans l'array de la personne @epenser ?
 @epenser = "@epenser"
 @epenser_position = array_handle.index(@epenser)
-print "> "
-puts "@epenser est en position #{@epenser_position} !"
+puts "\n> @epenser est en position #{@epenser_position} !"
 
 
-
-# Sors-moi une répartition des handle par taille de ces derniers (nombre de handle avec 1 caractère, nombre de handle avec 2 caractères, nombre de handle avec 3 caractères, etc)
+# Répartition des handles par taille.
 
 repartition_hash = {}
 
-array_handle.each do |handle|
-  longueur_handle = handle.length - 1
+array_handle.each do |x|
+  longueur_handle = x.length - 1
 
 if repartition_hash.key?(longueur_handle)
     repartition_hash[longueur_handle] += 1
@@ -60,6 +52,6 @@ if repartition_hash.key?(longueur_handle)
   end
 end
 
-repartition_hash.each do |longueur_handle, nombre|
-  puts "Nombre de handles avec #{longueur_handle} caractère(s) : #{nombre}"
+repartition_hash.sort.each do |longueur_handle, nombre|
+  puts "\n > Nombre de handles avec #{longueur_handle} caractère(s) : #{nombre}"
 end

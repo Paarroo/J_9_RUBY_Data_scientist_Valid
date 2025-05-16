@@ -15,22 +15,17 @@ my_hash = array_devises.zip(array_prices).to_h.transform_keys(&:to_sym)
 # La ou les crypto qui ont la plus grosse valeur.
 max_value = my_hash.values.max
 most_expensive = my_hash.select { |_, value| value == max_value }.keys
-print "> "
-puts "La ou les crypto qui ont la plus grosse valeur : #{most_expensive}"
+puts "\n> La ou les crypto qui ont la plus grosse valeur : #{most_expensive}"
 
 # La ou les crypto qui ont la plus petite valeur.
 min_value = my_hash.values.min
 least_expensive = my_hash.select { |_, value| value == min_value }.keys
-print "> "
-puts "La ou les crypto qui ont la plus petite valeur : #{least_expensive}"
+puts "\n> La ou les crypto qui ont la plus petite valeur : #{least_expensive}"
 
-# Les devises dont le cours est inférieur à 6000.
-below_6000 = my_hash.select { |_, value| value < 6000 }.keys
-print "> "
-puts "Les devises dont le cours est inférieur à 6000 : #{below_6000}"
+# Les devises dont le cours est inférieur à 6000.sz
+below_6000 = my_hash.select { |_, value| value < 6000 }
+puts "\n> Les devises dont le cours est inférieur à 6000 :\n#{below_6000}"
 
 # La devise la plus chère parmi celles dont le cours est inférieur à 6000.
 max_below_6000 = my_hash.select { |_, value| value < 6000 }.max_by { |_, value| value }&.first
-print "> "
-puts "La devise la plus chère parmi celles dont le cours est inférieur à 6000 : #{max_below_6000}"
-
+puts "\n> La devise la plus chère parmi celles dont le cours est inférieur à 6000 : #{max_below_6000}"
