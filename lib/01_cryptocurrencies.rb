@@ -11,9 +11,6 @@ array_prices = array_prices.map(&:to_f)
 # Create hash with zip & Convert key to symbols
 my_hash = array_devises.zip(array_prices).to_h.transform_keys(&:to_sym)
 
-# puts my_hash
-
-
 
 # La ou les crypto qui ont la plus grosse valeur.
 max_value = my_hash.values.max
